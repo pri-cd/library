@@ -11,6 +11,12 @@
 
     --foot-bg: #4a4e69;
     --foot-fg: #ffffff;
+
+    --dial-shadow: #003049;
+    --dial-btn-bg: #99582a;
+    --dial-btn-br: #003049;
+    --dial-img-hg: 40px;
+    --dial-btn-fg: #ffffff;
 }
 
 @font-face {
@@ -57,22 +63,142 @@ body {
 }
 
 .title {
-    width: 100%;
     padding: 5px 0px;
     background-color: var(--title-bg);
+
     color: var(--title-fg);
+    font-weight: 500;
     font-size: 32px;
     text-align: center;
 }
 
+/*
+** This section will style related to
+** main, dialog, buttons, and- book grid..
+*/
 .main {
     background-color: var(--main-bg);
     flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    position: relative;
 }
 
+.book-grid {
+    flex: 1;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.dialog-add-book {
+    border: 1px solid black;
+    box-shadow: 0px 0px 15px 1px var(--dial-shadow);
+    border-radius: 5px;
+    padding: 10px 20px;
+
+    position: absolute;
+    margin: auto;
+    /* Centering the dialogue! */
+    z-index: 10;
+}
+
+fieldset {
+    border: 0;
+    margin: 20px 5px;
+    padding: 20px 5px;
+}
+
+legend {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 16px;
+    font-weight: bold;
+}
+
+legend img {
+    height: var(--dial-img-hg);
+}
+
+.form-group {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+}
+
+
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+    appearance: none;
+}
+
+.form-group label,
+.form-group input {
+    font-size: 16px;
+}
+
+input {
+    padding: 3px 2px;
+}
+
+input::placeholder {
+    font-size: 12px;
+}
+
+.button-container {
+    display: grid;
+    gap: 10px;
+    grid-auto-flow: column;
+}
+
+button[id='submit'],
+.close-dialogue {
+    border: 2px solid var(--dial-btn-br);
+    background-color: var(--dial-btn-bg);
+    color: var(--dial-btn-fg);
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: transform 0.1s ease;
+}
+
+
+.add-book-btn {
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 5px;
+
+    margin: 10px 0px;
+    font-family: inherit;
+    align-self: center;
+    width: 100px;
+
+    transition: transform 0.1s ease;
+}
+
+.add-book-btn:hover,
+.close-dialogue:hover,
+button[id='submit']:hover {
+    transform: scale(1.02);
+}
+
+.add-book-btn:active,
+.close-dialogue:active,
+button[id='submit']:active {
+    transform: scale(0.95);
+}
+
+/*
+** I'm handling footer styles below.
+** (5px pad up/down, alignment, etc)...
+*/
 .footer {
     background-color: var(--foot-bg);
     padding: 5px 0px;
+
+    font-size: 12px;
     color: var(--foot-fg);
     text-align: center;
 }
