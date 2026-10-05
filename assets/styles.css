@@ -1,23 +1,15 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: "Google Sans";
 }
 
-:root {
-    --title-bg: #023047;
-    --title-fg: #ffffff;
-
-    --main-bg: #8ecae6;
-
-    --foot-bg: #4a4e69;
-    --foot-fg: #ffffff;
-
-    --dial-shadow: #003049;
-    --dial-btn-bg: #99582a;
-    --dial-btn-br: #003049;
-    --dial-img-hg: 40px;
-    --dial-btn-fg: #ffffff;
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+    appearance: none;
 }
+
+:root {}
 
 @font-face {
     font-family: 'Google Sans';
@@ -56,13 +48,15 @@
 }
 
 body {
-    font-family: "Google Sans";
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
 .title {
+    --title-bg: #023047;
+    --title-fg: #ffffff;
+
     padding: 5px 0px;
     background-color: var(--title-bg);
 
@@ -77,6 +71,8 @@ body {
 ** main, dialog, buttons, and- book grid..
 */
 .main {
+    --main-bg: #8ecae6;
+
     background-color: var(--main-bg);
     flex: 1;
 
@@ -86,108 +82,179 @@ body {
 }
 
 .book-grid {
+
+    --book-bg: #FF7700;
+    --book-bg-shadow: rgba(110, 14, 10, 50%);
+    --book-btn-bg: #dda15e;
+    --book-white: #ffffff;
+
     flex: 1;
+    margin: 10px;
+    justify-content: center;
 
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-}
-
-.dialog-add-book {
-    border: 1px solid black;
-    box-shadow: 0px 0px 15px 1px var(--dial-shadow);
-    border-radius: 5px;
-    padding: 10px 20px;
-
-    position: absolute;
-    margin: auto;
-    /* Centering the dialogue! */
-    z-index: 10;
-}
-
-fieldset {
-    border: 0;
-    margin: 20px 5px;
-    padding: 20px 5px;
-}
-
-legend {
-    display: flex;
-    align-items: center;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: clamp(150px, 150px, 300px);
     gap: 10px;
+}
 
-    font-size: 16px;
+.article-book {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 20px;
+    background-color: var(--book-bg);
+
+    border-radius: 5px;
+    border: 1px solid var(--book-white);
+    box-shadow: 0px 0px 15px 5px var(--book-bg-shadow);
+}
+
+.book-title-cn,
+.book-authr-cn,
+.book-pages-cn,
+.book-read-cn {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 20px;
+}
+
+.article-book label,
+.sLabel {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
     font-weight: bold;
 }
 
-legend img {
+.article-book .book-read-cn input[type='checkbox'] {
+    appearance: none;
+
+    width: 15px;
+    height: 15px;
+    border: 2px solid black;
+    border-radius: 50%;
+
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.article-book .book-read-cn input[type='checkbox']::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    background-color: green;
+    margin: 1px;
+    border-radius: 50%;
+
+    transform: scale(0);
+    transition: 0.1s transform ease-in-out;
+}
+
+.article-book .book-read-cn input[type='checkbox']:checked::before {
+    transform: scale(1);
+}
+
+.delete-book
+{
+    margin-top: auto;
+}
+
+.dialog-box {
+    --dial-shadow: #003049;
+
+    --dial-inp-bg: rgba(127, 121, 121, 50%);
+
+    --dial-btn-bg: #6a994e;
+    --dial-btn-br: #003049;
+    --dial-fg: #ffffff;
+
+    --dial-img-hg: 30px;
+    --dial-img-bg: #003049;
+
+    border: 1px solid black;
+    box-shadow: 0px 0px 15px 1px var(--dial-shadow);
+    border-radius: 5px;
+
+    /* Centering the dialogue! */
+    margin: auto;
+}
+
+.dialog-header img {
     height: var(--dial-img-hg);
 }
 
-.form-group {
+.dialog-header {
+    font-size: 20px;
+    font-weight: 500;
+    padding: 10px 10px;
+    background-color: var(--dial-img-bg);
+    color: var(--dial-fg);
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/*
+** Handling the styling of Dialog form!
+*/
+.dialog-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    padding: 10px 30px;
+}
+
+.dialog-form-group {
     display: grid;
     grid-template-columns: 1fr auto;
-    gap: 10px;
+    gap: 20px;
+    align-items: center;
 }
 
-
-input::-webkit-inner-spin-button,
-input::-webkit-outer-spin-button {
-    appearance: none;
+.dialog-form-group label {
+    font-weight: bold;
+    font-size: 14px;
 }
 
-.form-group label,
-.form-group input {
-    font-size: 16px;
+.dialog-form-group input:focus {
+    outline: 1px solid grey;
 }
 
-input {
-    padding: 3px 2px;
+.dialog-form-group input {
+    border-radius: 30px;
+    border: none;
+    padding: 5px 8px;
+    background-color: var(--dial-inp-bg);
 }
 
-input::placeholder {
-    font-size: 12px;
-}
-
-.button-container {
+.dialog-btn-container {
     display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 10px;
-    grid-auto-flow: column;
 }
 
-button[id='submit'],
-.close-dialogue {
-    border: 2px solid var(--dial-btn-br);
-    background-color: var(--dial-btn-bg);
-    color: var(--dial-btn-fg);
-    padding: 5px 10px;
+.dialog-btn-container button {
     border-radius: 5px;
-    transition: transform 0.1s ease;
-}
+    border: 1px solid var(--dial-btn-br);
+    background-color: var(--dial-btn-bg);
 
+    font-weight: bold;
+    padding: 5px 10px;
+}
 
 .add-book-btn {
-    border: 1px solid black;
     padding: 5px;
-    border-radius: 5px;
-
     margin: 10px 0px;
-    font-family: inherit;
+    width: 200px;
+
+    font-weight: bold;
+    border: 1px solid black;
+    border-radius: 5px;
     align-self: center;
-    width: 100px;
-
-    transition: transform 0.1s ease;
-}
-
-.add-book-btn:hover,
-.close-dialogue:hover,
-button[id='submit']:hover {
-    transform: scale(1.02);
-}
-
-.add-book-btn:active,
-.close-dialogue:active,
-button[id='submit']:active {
-    transform: scale(0.95);
 }
 
 /*
@@ -195,6 +262,9 @@ button[id='submit']:active {
 ** (5px pad up/down, alignment, etc)...
 */
 .footer {
+    --foot-bg: #4a4e69;
+    --foot-fg: #ffffff;
+
     background-color: var(--foot-bg);
     padding: 5px 0px;
 
