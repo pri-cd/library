@@ -9,7 +9,6 @@
     appearance: none;
 }
 
-:root {}
 
 @font-face {
     font-family: 'Google Sans';
@@ -136,8 +135,7 @@ body {
     border-radius: 50%;
 
     display: grid;
-    align-items: center;
-    justify-content: center;
+    place-items: center;
 }
 
 .article-book .book-read-cn input[type='checkbox']::before {
@@ -150,6 +148,9 @@ body {
 
     transform: scale(0);
     transition: 0.1s transform ease-in-out;
+/*     
+    align-self: center;
+    justify-self: center; */
 }
 
 .article-book .book-read-cn input[type='checkbox']:checked::before {

@@ -1,4 +1,4 @@
-const DEBUG = true;
+const DEBUG = false;
 const ID_BTN_ADD_BOOK = "#add-book-btn";
 const ID_BOOK_GRID = "#book-grid";
 
@@ -73,6 +73,17 @@ function book(author, title, pages) {
 function handleDeleteEvent(event) {
     if (event.target instanceof HTMLElement) {
         event.target.parentElement.remove();
+
+
+        const index = allBooks.indexOf(allBooks.find((value, index, array) => {
+            if (value instanceof book) {
+                const uuid = event.target.parentElement.dataset.uuid;
+                return value.ID === uuid;
+            }
+        }));
+
+        allBooks.splice(index, 1);
+        debug(allBooks);
     }
 }
 
